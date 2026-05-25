@@ -6,3 +6,14 @@ GET {{base_url}}/
 
 ###
 GET {{base_url}}/health
+
+
+### 
+POST {{base_url}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Raj Sharma",
+  "email": "raj.sharma@gmail.com",
+  "password": "secret123"
+}
