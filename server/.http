@@ -27,3 +27,7 @@ Content-Type: application/json
   "email": "raj.sharma@gmail.com",
   "password": "secret123"
 }
+
+
+###
+GET {{base_url}}/auth/me

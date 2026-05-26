@@ -1,6 +1,16 @@
-import { Body, Controller, HttpCode, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { type Response } from 'express';
 import { ACCESS_COOKIE, ACCESS_TOKEN_COOKIE_TTL } from 'src/common/constants';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { apiResponse } from 'src/common/helper/api-response';
 import { setCookie } from 'src/common/helper/cookie';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
@@ -36,6 +46,16 @@ export class AuthController {
 
     return apiResponse({
       message: 'Login successful.',
+    });
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async findUserById(@CurrentUser('id') ownerId: string) {
+    const owner = await this.authService.getOwner(ownerId);
+
+    return apiResponse({
+      data: owner,
     });
   }
 }

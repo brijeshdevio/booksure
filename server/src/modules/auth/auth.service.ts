@@ -60,10 +60,29 @@ export class AuthService {
     }
 
     const accessToken = await this.jwt.signAsync({
-      id: user.id,
+      sub: user.id,
       email: user.email,
     });
 
     return { accessToken };
+  }
+
+  async getOwner(id: string) {
+    const user = await this.prisma.owner.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        createdAt: true,
+      },
+    });
+    if (!user) {
+      throw new UnauthorizedException(
+        'You are not logged in or your session has expired. Please log in again.',
+      );
+    }
+
+    return user;
   }
 }
