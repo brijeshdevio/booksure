@@ -17,3 +17,13 @@ Content-Type: application/json
   "email": "raj.sharma@gmail.com",
   "password": "secret123"
 }
+
+
+### 
+POST {{base_url}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "raj.sharma@gmail.com",
+  "password": "secret123"
+}
