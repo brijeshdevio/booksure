@@ -31,3 +31,37 @@ Content-Type: application/json
 
 ###
 GET {{base_url}}/auth/me
+
+
+###
+POST {{base_url}}/shops
+Content-Type: application/json
+
+{
+  "name": "Raj Salon",
+  "address": "123 MG Road, Lucknow",
+  "phone": "9876543210",
+  "services": [
+    {
+      "name": "Haircut",
+      "description": "Professional haircut with modern styling.",
+      "duration": 30
+    },
+    {
+      "name": "Shave",
+      "description": "Clean shave with hot towel treatment.",
+      "duration": 20
+    },
+    {
+      "name": "Facial",
+      "description": "Deep cleansing facial for glowing skin.",
+      "duration": 60
+    }
+  ],
+  "workingHours": {
+    "start": "09:00",
+    "end": "19:00",
+    "slotDuration": 30,
+    "days": [1, 2, 3, 4, 5, 6]
+  }
+}
