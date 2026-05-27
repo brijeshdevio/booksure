@@ -13,6 +13,7 @@ import { apiResponse } from 'src/common/helper/api-response';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
 import { CreateShopDto, CreateShopSchema } from './dto/create-shop.dto';
+import { StatusDto, StatusSchema } from './dto/status.dto';
 import { UpdateShopDto, UpdateShopSchema } from './dto/update-shop.dto';
 import { ShopsService } from './shops.service';
 
@@ -52,6 +53,20 @@ export class ShopsController {
 
     return apiResponse({
       message: 'Shop detail updated successfully.',
+      data: shop,
+    });
+  }
+
+  @Patch('status')
+  @HttpCode(200)
+  async updateStatus(
+    @CurrentUser('id') ownerId: string,
+    @Body(new ValidationPipe(StatusSchema)) body: StatusDto,
+  ) {
+    const shop = await this.shopsService.updateStatus(ownerId, body);
+
+    return apiResponse({
+      message: 'Shop status updated successfully.',
       data: shop,
     });
   }

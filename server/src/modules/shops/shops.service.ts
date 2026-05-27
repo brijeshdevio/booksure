@@ -11,6 +11,7 @@ import { PRISMA_CODES } from 'src/common/constants';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 import { CreateShopDto } from './dto/create-shop.dto';
+import { StatusDto } from './dto/status.dto';
 import { UpdateShopDto } from './dto/update-shop.dto';
 
 @Injectable()
@@ -108,6 +109,30 @@ export class ShopsService {
           id: true,
           name: true,
           slug: true,
+        },
+      });
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        if (error.code === PRISMA_CODES.NOT_FOUND) {
+          throw new BadRequestException(
+            `Could not find shop for owner ${ownerId} or shop does not exist.`,
+          );
+        }
+      }
+      throw error;
+    }
+  }
+
+  async updateStatus(ownerId: string, data: StatusDto) {
+    try {
+      return await this.prisma.shop.update({
+        where: { ownerId },
+        data: { isActive: data.isActive },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          isActive: true,
         },
       });
     } catch (error) {
