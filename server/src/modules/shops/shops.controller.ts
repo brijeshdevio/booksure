@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpCode,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -12,6 +13,7 @@ import { apiResponse } from 'src/common/helper/api-response';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
 import { CreateShopDto, CreateShopSchema } from './dto/create-shop.dto';
+import { UpdateShopDto, UpdateShopSchema } from './dto/update-shop.dto';
 import { ShopsService } from './shops.service';
 
 @Controller('shops')
@@ -38,5 +40,19 @@ export class ShopsController {
     const shop = await this.shopsService.getShop(ownerId);
 
     return apiResponse({ data: shop });
+  }
+
+  @Patch('me')
+  @HttpCode(200)
+  async updateShop(
+    @CurrentUser('id') ownerId: string,
+    @Body(new ValidationPipe(UpdateShopSchema)) body: UpdateShopDto,
+  ) {
+    const shop = await this.shopsService.updateShop(ownerId, body);
+
+    return apiResponse({
+      message: 'Shop detail updated successfully.',
+      data: shop,
+    });
   }
 }

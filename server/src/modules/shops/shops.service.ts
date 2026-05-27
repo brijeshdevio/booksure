@@ -11,6 +11,7 @@ import { PRISMA_CODES } from 'src/common/constants';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 import { CreateShopDto } from './dto/create-shop.dto';
+import { UpdateShopDto } from './dto/update-shop.dto';
 
 @Injectable()
 export class ShopsService {
@@ -92,5 +93,32 @@ export class ShopsService {
     }
 
     return shop;
+  }
+
+  async updateShop(ownerId: string, data: UpdateShopDto) {
+    try {
+      const slug = data.name
+        ? await this.generateSlugAndCheck(data.name)
+        : undefined;
+
+      return await this.prisma.shop.update({
+        where: { ownerId },
+        data: { ...data, slug },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+        },
+      });
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        if (error.code === PRISMA_CODES.NOT_FOUND) {
+          throw new BadRequestException(
+            `Could not find shop for owner ${ownerId} or shop does not exist.`,
+          );
+        }
+      }
+      throw error;
+    }
   }
 }

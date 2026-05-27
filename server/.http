@@ -69,3 +69,30 @@ Content-Type: application/json
 
 ###
 GET {{base_url}}/shops/me
+
+
+
+###
+PATCH {{base_url}}/shops/me
+Content-Type: application/json
+
+{
+  "services": [
+    {
+      "name": "Haircut",
+      "description": "Professional haircut with modern styling.",
+      "duration": 30
+    },
+    {
+      "name": "Facial",
+      "description": "Deep cleansing facial for glowing skin.",
+      "duration": 60
+    }
+  ],
+  "workingHours": {
+    "start": "10:00",
+    "end": "19:00",
+    "slotDuration": 30,
+    "days": [1, 2, 3, 4, 5, 6]
+  }
+}
