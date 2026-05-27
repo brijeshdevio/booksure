@@ -1,6 +1,10 @@
 import crypto from 'node:crypto';
 
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+} from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import slugify from 'slugify';
 import { PRISMA_CODES } from 'src/common/constants';
@@ -72,5 +76,21 @@ export class ShopsService {
       }
       throw error;
     }
+  }
+
+  async getShop(ownerId: string) {
+    const shop = await this.prisma.shop.findUnique({
+      where: { ownerId },
+      omit: {
+        ownerId: true,
+      },
+    });
+    if (!shop) {
+      throw new BadRequestException(
+        `Could not find shop for owner ${ownerId} or shop does not exist.`,
+      );
+    }
+
+    return shop;
   }
 }

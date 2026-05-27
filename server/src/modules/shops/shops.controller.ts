@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { apiResponse } from 'src/common/helper/api-response';
@@ -24,5 +31,12 @@ export class ShopsController {
       message: 'Shop created successfully.',
       data: shop,
     });
+  }
+
+  @Get('me')
+  async getShop(@CurrentUser('id') ownerId: string) {
+    const shop = await this.shopsService.getShop(ownerId);
+
+    return apiResponse({ data: shop });
   }
 }
