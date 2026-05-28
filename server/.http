@@ -105,3 +105,7 @@ Content-Type: application/json
 {
   "isActive": false
 }
+
+
+###
+GET {{base_url}}/public/shops/raj-salon
