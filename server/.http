@@ -113,3 +113,14 @@ GET {{base_url}}/public/shops/raj-salon
 
 ###
 GET {{base_url}}/public/shops/raj-salon/slots?date=2026-06-03
+
+
+###
+POST {{base_url}}/bookings
+Content-Type: application/json
+
+{
+  "shopSlug": "raj-salon",
+  "customerName": "Amit Kumar",
+  "scheduledAt": "2026-06-03T03:30:00.000Z"
+}

@@ -73,7 +73,7 @@ export class ShopsService {
           );
         }
         if (error.code === PRISMA_CODES.NOT_FOUND) {
-          throw new ConflictException(`Owner  ${ownerId} not found.`);
+          throw new BadRequestException(`Owner  ${ownerId} not found.`);
         }
       }
       throw error;
