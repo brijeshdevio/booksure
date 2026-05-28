@@ -109,3 +109,7 @@ Content-Type: application/json
 
 ###
 GET {{base_url}}/public/shops/raj-salon
+
+
+###
+GET {{base_url}}/public/shops/raj-salon/slots?date=2026-06-03

@@ -1,6 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { apiResponse } from 'src/common/helper/api-response';
+import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
+import { SlotQueryDto, SlotsQuerySchema } from './dto/slot-query.dto';
 import { PublicService } from './public.service';
 
 @Controller('public')
@@ -11,5 +13,14 @@ export class PublicController {
   async getShop(@Param('slug') slug: string) {
     const shop = await this.publicService.getShop(slug);
     return apiResponse({ data: shop });
+  }
+
+  @Get('shops/:slug/slots')
+  async getSlots(
+    @Param('slug') slug: string,
+    @Query(new ValidationPipe(SlotsQuerySchema)) query: SlotQueryDto,
+  ) {
+    const slots = await this.publicService.getSlots(slug, query);
+    return apiResponse({ data: slots });
   }
 }
