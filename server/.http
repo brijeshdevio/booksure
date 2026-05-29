@@ -124,3 +124,7 @@ Content-Type: application/json
   "customerName": "Amit Kumar",
   "scheduledAt": "2026-06-03T03:30:00.000Z"
 }
+
+
+###
+GET {{base_url}}/bookings/cmpp6f7kk0000rzcpfnje8rcm

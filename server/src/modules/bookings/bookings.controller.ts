@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { apiResponse } from 'src/common/helper/api-response';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
@@ -20,6 +20,15 @@ export class BookingsController {
 
     return apiResponse({
       message: 'Booking Successfully.',
+      data: booking,
+    });
+  }
+
+  @Get(':bookingId')
+  async getBooking(@Param('bookingId') bookingId: string) {
+    const booking = await this.bookingsService.getBooking(bookingId);
+
+    return apiResponse({
       data: booking,
     });
   }

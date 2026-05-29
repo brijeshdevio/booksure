@@ -84,4 +84,30 @@ export class BookingsService {
       throw error;
     }
   }
+
+  async getBooking(bookingId: string) {
+    const booking = await this.prisma.booking.findUnique({
+      where: { id: bookingId },
+      select: {
+        id: true,
+        tokenNumber: true,
+        customerName: true,
+        shop: {
+          select: {
+            name: true,
+            address: true,
+            phone: true,
+          },
+        },
+        status: true,
+        scheduledAt: true,
+      },
+    });
+
+    if (!booking) {
+      throw new BadRequestException(`Could not find booking for ${bookingId}.`);
+    }
+
+    return booking;
+  }
 }
