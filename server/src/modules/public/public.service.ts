@@ -1,7 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { SlotQueryDto } from 'src/common/dto/slot-query.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-
-import { SlotQueryDto } from './dto/slot-query.dto';
 
 type WorkingHours = {
   start: string;

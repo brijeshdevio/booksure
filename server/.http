@@ -128,3 +128,7 @@ Content-Type: application/json
 
 ###
 GET {{base_url}}/bookings/cmpp6f7kk0000rzcpfnje8rcm
+
+
+###
+GET {{base_url}}/bookings

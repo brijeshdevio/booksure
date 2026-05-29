@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
+import { SlotQueryDto, SlotsQuerySchema } from 'src/common/dto/slot-query.dto';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { apiResponse } from 'src/common/helper/api-response';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
@@ -30,6 +41,19 @@ export class BookingsController {
 
     return apiResponse({
       data: booking,
+    });
+  }
+
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  async getBookings(
+    @CurrentUser('id') ownerId: string,
+    @Query(new ValidationPipe(SlotsQuerySchema)) query: SlotQueryDto,
+  ) {
+    const data = await this.bookingsService.getBookings(ownerId, query);
+
+    return apiResponse({
+      data,
     });
   }
 }

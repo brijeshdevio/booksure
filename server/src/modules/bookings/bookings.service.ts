@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import { PRISMA_CODES } from 'src/common/constants';
+import { SlotQueryDto } from 'src/common/dto/slot-query.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 import { CreateBookingDto } from './dto/create-booking.dto';
@@ -109,5 +110,44 @@ export class BookingsService {
     }
 
     return booking;
+  }
+
+  async getBookings(ownerId: string, query: SlotQueryDto) {
+    const inputDate = query.date ? new Date(query.date) : new Date();
+
+    const startOfDay = new Date(inputDate);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(inputDate);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const total = await this.prisma.booking.count({
+      where: {
+        shop: { ownerId },
+        scheduledAt: {
+          gte: startOfDay,
+          lte: endOfDay,
+        },
+      },
+    });
+    const bookings = await this.prisma.booking.findMany({
+      where: {
+        shop: { ownerId },
+        scheduledAt: {
+          gte: startOfDay,
+          lte: endOfDay,
+        },
+      },
+      orderBy: { scheduledAt: 'asc' },
+      select: {
+        id: true,
+        tokenNumber: true,
+        customerName: true,
+        status: true,
+        scheduledAt: true,
+      },
+    });
+
+    return { total, date: inputDate, bookings };
   }
 }

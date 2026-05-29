@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import { SlotQueryDto, SlotsQuerySchema } from 'src/common/dto/slot-query.dto';
 import { apiResponse } from 'src/common/helper/api-response';
 import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
-import { SlotQueryDto, SlotsQuerySchema } from './dto/slot-query.dto';
 import { PublicService } from './public.service';
 
 @Controller('public')
