@@ -9,6 +9,7 @@ import { SlotQueryDto } from 'src/common/dto/slot-query.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 import { CreateBookingDto } from './dto/create-booking.dto';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Injectable()
 export class BookingsService {
@@ -149,5 +150,35 @@ export class BookingsService {
     });
 
     return { total, date: inputDate, bookings };
+  }
+
+  async updateStatus(
+    ownerId: string,
+    bookingId: string,
+    data: UpdateStatusDto,
+  ) {
+    try {
+      return await this.prisma.booking.update({
+        where: {
+          id: bookingId,
+          shop: { ownerId },
+        },
+        data: { status: data.status },
+        select: {
+          id: true,
+          status: true,
+          updatedAt: true,
+        },
+      });
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        if (error.code === PRISMA_CODES.NOT_FOUND) {
+          throw new BadRequestException(
+            `Could not find shop or booking for ${bookingId}.`,
+          );
+        }
+      }
+      throw error;
+    }
   }
 }

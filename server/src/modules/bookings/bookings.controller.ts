@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -18,6 +19,7 @@ import {
   CreateBookingDto,
   CreateBookingSchema,
 } from './dto/create-booking.dto';
+import { UpdateStatusDto, UpdateStatusSchema } from './dto/update-status.dto';
 
 @Controller('bookings')
 export class BookingsController {
@@ -54,6 +56,25 @@ export class BookingsController {
 
     return apiResponse({
       data,
+    });
+  }
+
+  @Patch(':bookingId/status')
+  @UseGuards(JwtAuthGuard)
+  async updateStatus(
+    @CurrentUser('id') ownerId: string,
+    @Param('bookingId') bookingId: string,
+    @Body(new ValidationPipe(UpdateStatusSchema)) body: UpdateStatusDto,
+  ) {
+    const booking = await this.bookingsService.updateStatus(
+      ownerId,
+      bookingId,
+      body,
+    );
+
+    return apiResponse({
+      message: 'Booking status updated successfully.',
+      data: booking,
     });
   }
 }

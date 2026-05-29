@@ -131,4 +131,13 @@ GET {{base_url}}/bookings/cmpp6f7kk0000rzcpfnje8rcm
 
 
 ###
-GET {{base_url}}/bookings
+GET {{base_url}}/bookings?date=2026-06-03
+
+
+###
+PATCH {{base_url}}/bookings/cmpp6502r000136cp9ccgtxpj/status
+Content-Type: application/json
+
+{
+  "status": "CANCELLED"
+}
