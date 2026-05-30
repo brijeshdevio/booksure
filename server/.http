@@ -1,14 +1,24 @@
 @base_url = http://localhost:3000/api/v1
 
-### 
-GET {{base_url}}/
-
+############################################################
+# HEALTH CHECK
+############################################################
 
 ###
+# Root endpoint (basic API check)
+GET {{base_url}}/
+
+###
+# Health status of the server
 GET {{base_url}}/health
 
 
-### 
+############################################################
+# AUTH MODULE
+############################################################
+
+###
+# Register new user
 POST {{base_url}}/auth/register
 Content-Type: application/json
 
@@ -18,8 +28,8 @@ Content-Type: application/json
   "password": "secret123"
 }
 
-
-### 
+###
+# Login user (returns JWT token)
 POST {{base_url}}/auth/login
 Content-Type: application/json
 
@@ -28,12 +38,17 @@ Content-Type: application/json
   "password": "secret123"
 }
 
-
 ###
+# Get current logged-in user
 GET {{base_url}}/auth/me
 
 
+############################################################
+# SHOPS MODULE
+############################################################
+
 ###
+# Create a new shop (owner only)
 POST {{base_url}}/shops
 Content-Type: application/json
 
@@ -66,13 +81,12 @@ Content-Type: application/json
   }
 }
 
-
 ###
+# Get my shop (owner dashboard)
 GET {{base_url}}/shops/me
 
-
-
 ###
+# Update shop details (services, working hours, etc.)
 PATCH {{base_url}}/shops/me
 Content-Type: application/json
 
@@ -97,8 +111,8 @@ Content-Type: application/json
   }
 }
 
-
 ###
+# Enable/Disable shop (active status toggle)
 PATCH {{base_url}}/shops/status
 Content-Type: application/json
 
@@ -107,15 +121,25 @@ Content-Type: application/json
 }
 
 
+############################################################
+# PUBLIC SHOP VIEW (CUSTOMER SIDE)
+############################################################
+
 ###
+# Get public shop details by slug
 GET {{base_url}}/public/shops/raj-salon
 
-
 ###
+# Get available time slots for a specific date
 GET {{base_url}}/public/shops/raj-salon/slots?date=2026-06-03
 
 
+############################################################
+# BOOKINGS MODULE
+############################################################
+
 ###
+# Create a new booking
 POST {{base_url}}/bookings
 Content-Type: application/json
 
@@ -125,16 +149,16 @@ Content-Type: application/json
   "scheduledAt": "2026-06-03T03:30:00.000Z"
 }
 
-
 ###
+# Get booking by ID
 GET {{base_url}}/bookings/cmpp6f7kk0000rzcpfnje8rcm
 
-
 ###
+# Get bookings by date (for dashboard/calendar view)
 GET {{base_url}}/bookings?date=2026-06-03
 
-
 ###
+# Update booking status (DONE / CANCELLED)
 PATCH {{base_url}}/bookings/cmpp6502r000136cp9ccgtxpj/status
 Content-Type: application/json
 
@@ -143,5 +167,10 @@ Content-Type: application/json
 }
 
 
+############################################################
+# DASHBOARD / ANALYTICS
+############################################################
+
 ###
+# Get booking statistics (today + all-time)
 GET {{base_url}}/dashboard/stats
