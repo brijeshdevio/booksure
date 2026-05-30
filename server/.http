@@ -139,5 +139,9 @@ PATCH {{base_url}}/bookings/cmpp6502r000136cp9ccgtxpj/status
 Content-Type: application/json
 
 {
-  "status": "CANCELLED"
+  "status": "DONE"
 }
+
+
+###
+GET {{base_url}}/dashboard/stats

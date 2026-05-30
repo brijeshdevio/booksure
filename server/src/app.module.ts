@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { BookingsModule } from './modules/bookings/bookings.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { PublicModule } from './modules/public/public.module';
 import { ShopsModule } from './modules/shops/shops.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -15,6 +16,7 @@ import { PrismaModule } from './prisma/prisma.module';
     ShopsModule,
     PublicModule,
     BookingsModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
