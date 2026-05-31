@@ -1,8 +1,8 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/common/decorators/current-user.decorator';
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
-import { apiResponse } from 'src/common/helper/api-response';
 
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { apiResponse } from '../../common/helper/api-response';
 import { DashboardService } from './dashboard.service';
 
 @Controller('dashboard')

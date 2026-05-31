@@ -1,5 +1,7 @@
 import { CookieOptions, Response } from 'express';
-import { env } from 'src/config/env.config';
+
+import { env } from '../../config/env.config';
+// import { env } from 'src/config/env.config';
 
 const baseCookieOptions = (): CookieOptions => ({
   httpOnly: true,

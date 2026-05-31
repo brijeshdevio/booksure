@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { JwtModule, JwtSignOptions } from '@nestjs/jwt';
-import { env } from 'src/config/env.config';
-import { PrismaModule } from 'src/prisma/prisma.module';
 
+import { env } from '../../config/env.config';
+import { PrismaModule } from '../../prisma/prisma.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 

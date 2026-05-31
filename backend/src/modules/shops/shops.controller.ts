@@ -7,11 +7,11 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { CurrentUser } from 'src/common/decorators/current-user.decorator';
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
-import { apiResponse } from 'src/common/helper/api-response';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { apiResponse } from '../../common/helper/api-response';
+import { ValidationPipe } from '../../common/pipes/validation.pipe';
 import { CreateShopDto, CreateShopSchema } from './dto/create-shop.dto';
 import { StatusDto, StatusSchema } from './dto/status.dto';
 import { UpdateShopDto, UpdateShopSchema } from './dto/update-shop.dto';

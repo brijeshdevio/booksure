@@ -4,10 +4,10 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
-import { PRISMA_CODES } from 'src/common/constants';
-import { SlotQueryDto } from 'src/common/dto/slot-query.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
+import { PRISMA_CODES } from '../../common/constants';
+import { SlotQueryDto } from '../../common/dto/slot-query.dto';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
 

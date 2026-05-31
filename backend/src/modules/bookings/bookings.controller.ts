@@ -8,12 +8,15 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { CurrentUser } from 'src/common/decorators/current-user.decorator';
-import { SlotQueryDto, SlotsQuerySchema } from 'src/common/dto/slot-query.dto';
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
-import { apiResponse } from 'src/common/helper/api-response';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import {
+  SlotQueryDto,
+  SlotsQuerySchema,
+} from '../../common/dto/slot-query.dto';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { apiResponse } from '../../common/helper/api-response';
+import { ValidationPipe } from '../../common/pipes/validation.pipe';
 import { BookingsService } from './bookings.service';
 import {
   CreateBookingDto,

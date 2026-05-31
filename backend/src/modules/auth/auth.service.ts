@@ -6,9 +6,9 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import { hash, verify } from 'argon2';
-import { DUMMY_HASH, PRISMA_CODES } from 'src/common/constants';
-import { PrismaService } from 'src/prisma/prisma.service';
 
+import { DUMMY_HASH, PRISMA_CODES } from '../../common/constants';
+import { PrismaService } from '../../prisma/prisma.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 

@@ -7,9 +7,9 @@ import {
 } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import slugify from 'slugify';
-import { PRISMA_CODES } from 'src/common/constants';
-import { PrismaService } from 'src/prisma/prisma.service';
 
+import { PRISMA_CODES } from '../../common/constants';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CreateShopDto } from './dto/create-shop.dto';
 import { StatusDto } from './dto/status.dto';
 import { UpdateShopDto } from './dto/update-shop.dto';

@@ -8,13 +8,13 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { type Response } from 'express';
-import { ACCESS_COOKIE, ACCESS_TOKEN_COOKIE_TTL } from 'src/common/constants';
-import { CurrentUser } from 'src/common/decorators/current-user.decorator';
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
-import { apiResponse } from 'src/common/helper/api-response';
-import { setCookie } from 'src/common/helper/cookie';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 
+import { ACCESS_COOKIE, ACCESS_TOKEN_COOKIE_TTL } from '../../common/constants';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { apiResponse } from '../../common/helper/api-response';
+import { setCookie } from '../../common/helper/cookie';
+import { ValidationPipe } from '../../common/pipes/validation.pipe';
 import { AuthService } from './auth.service';
 import { LoginDto, LoginSchema } from './dto/login.dto';
 import { RegisterDto, RegisterSchema } from './dto/register.dto';
